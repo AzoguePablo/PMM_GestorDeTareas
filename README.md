@@ -106,7 +106,6 @@ Para comprobar la adaptación de la interfaz y el funcionamiento general he real
 
 * **Listado principal y filtro activo:**
 
-  ![alt text](listado.png)
 
   ![alt text](listado2.png)
 
@@ -118,7 +117,7 @@ Para comprobar la adaptación de la interfaz y el funcionamiento general he real
 
 * **Diálogo de confirmación de borrado:**
 
-  ![alt text](ConfirmacionBorrado.png)
+  [[![alt text](ConfirmacionBorrado.png)](https://github.com/AzoguePablo/PMM_GestorDeTareas/blob/main/Capturas/ConfirmacionBorrado.png)
 
 * **Consulta de tareas de ejemplo (API REST):**
 
