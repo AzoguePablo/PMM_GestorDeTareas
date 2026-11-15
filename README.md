@@ -117,7 +117,7 @@ Para comprobar la adaptación de la interfaz y el funcionamiento general he real
 
 * **Diálogo de confirmación de borrado:**
 
-  [[![alt text](ConfirmacionBorrado.png)](https://github.com/AzoguePablo/PMM_GestorDeTareas/blob/main/Capturas/ConfirmacionBorrado.png)
+https://github.com/AzoguePablo/PMM_GestorDeTareas/blob/main/Capturas/ConfirmacionBorrado.png
 
 * **Consulta de tareas de ejemplo (API REST):**
 
