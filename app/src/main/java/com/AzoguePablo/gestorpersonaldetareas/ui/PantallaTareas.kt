@@ -1,5 +1,8 @@
 package com.AzoguePablo.gestorpersonaldetareas.ui
 
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.saveable.rememberSaveable
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -62,7 +65,7 @@ fun PantallaTareas(viewModel: TareaViewModel, onIrAApi: () -> Unit) {
     val soloPendientes by viewModel.preferencias.soloPendientesFlow.collectAsStateWithLifecycle(initialValue = false)
 
     // Estados para controlar los diálogos de Crear, Editar y Eliminar
-    var mostrarDialogoCrear by remember { mutableStateOf(false) }
+    var mostrarDialogoCrear by rememberSaveable { mutableStateOf(false) }
     var tareaAEditar by remember { mutableStateOf<Tarea?>(null) }
     var tareaAEliminar by remember { mutableStateOf<Tarea?>(null) }
 
@@ -315,11 +318,12 @@ fun DialogoTarea(
     onDismiss: () -> Unit,
     onConfirmar: (String, String, Prioridad) -> Unit
 ) {
-    var titulo by remember { mutableStateOf(tareaExistente?.titulo ?: "") }
-    var descripcion by remember { mutableStateOf(tareaExistente?.descripcion ?: "") }
-    var prioridadSeleccionada by remember { mutableStateOf(tareaExistente?.prioridad ?: Prioridad.MEDIA) }
+    // Cambiamos remember por rememberSaveable para sobrevivir al giro de pantalla (Prueba 12)
+    var titulo by rememberSaveable { mutableStateOf(tareaExistente?.titulo ?: "") }
+    var descripcion by rememberSaveable { mutableStateOf(tareaExistente?.descripcion ?: "") }
+    var prioridadSeleccionada by rememberSaveable { mutableStateOf(tareaExistente?.prioridad ?: Prioridad.MEDIA) }
 
-    var errorTitulo by remember { mutableStateOf<String?>(null) }
+    var errorTitulo by rememberSaveable { mutableStateOf<String?>(null) }
     var menuExpandido by remember { mutableStateOf(false) }
     var guardando by remember { mutableStateOf(false) }
 
@@ -327,7 +331,13 @@ fun DialogoTarea(
         onDismissRequest = onDismiss,
         title = { Text(if (tareaExistente == null) "Nueva Tarea" else "Editar Tarea") },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            // Añadimos verticalScroll para que en horizontal o pantallas compactas nunca se corte
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
                 OutlinedTextField(
                     value = titulo,
                     onValueChange = {

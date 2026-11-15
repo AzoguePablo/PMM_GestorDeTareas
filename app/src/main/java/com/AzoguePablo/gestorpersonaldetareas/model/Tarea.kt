@@ -7,7 +7,7 @@ enum class Prioridad {
     BAJA, MEDIA, ALTA
 }
 
-// Le decimos a Room que esta clase será una tabla llamada "tabla_tareas"
+// Le decimos a Room que esta clase será una tabla llamada "tareas"
 @Entity(tableName = "tareas")
 data class Tarea(
     // PrimaryKey hace que este sea el identificador principal.

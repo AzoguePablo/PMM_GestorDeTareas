@@ -1,4 +1,4 @@
-package com.AzoguePablo.gestorpersonaldetareas.model
+package com.AzoguePablo.gestorpersonaldetareas.preferences
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 // 1. Creamos la instancia única del DataStore usando una extensión sobre Context
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "configuracion_tareas")
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "configuracion_tareas")
 
 class PreferenciasUsuario(private val context: Context) {
 

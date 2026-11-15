@@ -3,9 +3,9 @@ package com.AzoguePablo.gestorpersonaldetareas.viewmodel // Asegúrate de que tu
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.AzoguePablo.gestorpersonaldetareas.model.PreferenciasUsuario
+import com.AzoguePablo.gestorpersonaldetareas.preferences.PreferenciasUsuario
 import com.AzoguePablo.gestorpersonaldetareas.model.Tarea
-import com.AzoguePablo.gestorpersonaldetareas.model.TareaDao
+import com.AzoguePablo.gestorpersonaldetareas.data.TareaDao
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine

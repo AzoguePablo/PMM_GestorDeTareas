@@ -88,7 +88,7 @@ fun PantallaApi(
                             modifier = Modifier.fillMaxSize(),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            items(estadoActual.tareas) { tareaApi ->
+                            items(estadoActual.tareas,key = { it.id }) { tareaApi ->
                                 ItemTareaApi(tareaApi)
                             }
                         }
