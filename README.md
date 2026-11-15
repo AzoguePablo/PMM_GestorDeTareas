@@ -104,16 +104,24 @@ Para comprobar la adaptación de la interfaz y el funcionamiento general he real
 
 ## Capturas de Pantalla
 
-*(Asegúrate de subir las 4 capturas a una carpeta `capturas/` en tu repositorio con estos nombres o actualizar las rutas)*
-
 * **Listado principal y filtro activo:**
-  ![Listado principal](capturas/01_listado_tareas.png)
+
+  ![listado](Capturas/listado.png).
+  ![listado2](Capturas/listado2.png)
+
 * **Formulario de creación / edición de tarea:**
-  ![Formulario de tarea](capturas/02_formulario_tarea.png)
+
+  ![CrearTarea](Capturas/CrearTarea.png)
+
+  ![Error Creacion](Capturas/ErrorCrearTarea.png)
+
 * **Diálogo de confirmación de borrado:**
-  ![Confirmar borrado](capturas/03_confirmar_borrado.png)
+
+![Borrado](Capturas/ConfirmacionBorrado.png))
+
 * **Consulta de tareas de ejemplo (API REST):**
-  ![Consulta API](capturas/04_consulta_api.png)
+
+  ![TareasApi](Capturas/TareasDeEj.png)
 
 ---
 
