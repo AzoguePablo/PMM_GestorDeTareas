@@ -27,14 +27,20 @@ import androidx.compose.ui.platform.LocalContext
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun PantallaTareas(viewModel: TareaViewModel) {
+fun PantallaTareas(viewModel: TareaViewModel, onIrAApi: () -> Unit) {
     val listaTareas by viewModel.tareas.collectAsStateWithLifecycle()
     val soloPendientes by viewModel.preferencias.soloPendientesFlow.collectAsStateWithLifecycle(initialValue = false)
     var mostrarDialogo by remember { mutableStateOf(false) }
-
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Mis Tareas") })
+            TopAppBar(
+                title = { Text("Mis Tareas") },
+                actions = {
+                    Button(onClick = onIrAApi) {
+                        Text("Ver API")
+                    }
+                }
+            )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = { mostrarDialogo = true }) {
