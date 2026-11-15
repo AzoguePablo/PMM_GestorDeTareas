@@ -48,6 +48,9 @@ class TareaViewModel(
     fun borrarTarea(tarea: Tarea) {
         viewModelScope.launch { dao.borrarTarea(tarea) }
     }
+    fun actualizarTarea(tarea: Tarea) {
+        viewModelScope.launch { dao.actualizarTarea(tarea) }
+    }
 
     fun alternarCompletada(tarea: Tarea) {
         viewModelScope.launch {

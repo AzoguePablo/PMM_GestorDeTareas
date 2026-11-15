@@ -19,15 +19,14 @@ import com.AzoguePablo.gestorpersonaldetareas.viewmodel.TareasApiViewModel
 @Composable
 fun PantallaApi(
     viewModel: TareasApiViewModel,
-    onVolver: () -> Unit // Función para regresar a tus tareas locales
+    onVolver: () -> Unit
 ) {
-    // Escuchamos el estado del ViewModel
     val estado by viewModel.estado.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Tareas de ejemplo (API)") },
+                title = { Text("Tareas de ejemplo") },
                 navigationIcon = {
                     Button(onClick = onVolver, modifier = Modifier.padding(start = 8.dp)) {
                         Text("Volver")
@@ -36,46 +35,62 @@ fun PantallaApi(
             )
         }
     ) { paddingValues ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(16.dp),
-            contentAlignment = Alignment.Center
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // El "when" mágico que controla toda la interfaz según el estado
-            when (val estadoActual = estado) {
-                is EstadoApi.Inactivo -> {
-                    Button(onClick = { viewModel.obtenerTareasDeLaRed() }) {
-                        Text("Descargar tareas del servidor")
+            // Botón de carga deshabilitado mientras se realiza la petición (Requisito 3.6)
+            Button(
+                onClick = { viewModel.obtenerTareasDeLaRed() },
+                enabled = estado !is EstadoApi.Cargando,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    if (estado is EstadoApi.Cargando) "Cargando..."
+                    else "Descargar tareas del servidor"
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                when (val estadoActual = estado) {
+                    is EstadoApi.Inactivo -> {
+                        Text("Pulsa el botón superior para consultar las tareas de ejemplo.")
                     }
-                }
-                is EstadoApi.Cargando -> {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        CircularProgressIndicator() // El indicador de carga
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text("Conectando con el servidor...")
-                    }
-                }
-                is EstadoApi.Error -> {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = estadoActual.mensaje,
-                            color = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.padding(bottom = 16.dp)
-                        )
-                        Button(onClick = { viewModel.obtenerTareasDeLaRed() }) {
-                            Text("Reintentar conexión")
+                    is EstadoApi.Cargando -> {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            CircularProgressIndicator()
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text("Conectando con el servidor...")
                         }
                     }
-                }
-                is EstadoApi.Exito -> {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        items(estadoActual.tareas) { tareaApi ->
-                            ItemTareaApi(tareaApi)
+                    is EstadoApi.Error -> {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(
+                                text = estadoActual.mensaje,
+                                color = MaterialTheme.colorScheme.error,
+                                modifier = Modifier.padding(bottom = 16.dp)
+                            )
+                            Button(onClick = { viewModel.obtenerTareasDeLaRed() }) {
+                                Text("Reintentar conexión")
+                            }
+                        }
+                    }
+                    is EstadoApi.Exito -> {
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            items(estadoActual.tareas) { tareaApi ->
+                                ItemTareaApi(tareaApi)
+                            }
                         }
                     }
                 }
@@ -84,7 +99,6 @@ fun PantallaApi(
     }
 }
 
-// Un diseño de tarjeta diferente para que no se confundan con tus tareas locales
 @Composable
 fun ItemTareaApi(tarea: TareaApi) {
     Card(
