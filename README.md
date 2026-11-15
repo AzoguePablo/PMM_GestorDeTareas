@@ -106,14 +106,14 @@ Para comprobar la adaptación de la interfaz y el funcionamiento general he real
 
 * **Listado principal y filtro activo:**
 
-
-  ![alt text](listado2.png)
+  ![listado](Capturas/listado.png).
+  ![listado2](Capturas/listado2.png)
 
 * **Formulario de creación / edición de tarea:**
 
-  ![alt text](CrearTarea.png)
+  ![CrearTarea](Capturas/CrearTarea.png)
 
-  ![alt text](ErrorCrearTarea.png)
+  ![Error Creacion](Capturas/ErrorCrearTarea.png)
 
 * **Diálogo de confirmación de borrado:**
 
@@ -121,7 +121,7 @@ Para comprobar la adaptación de la interfaz y el funcionamiento general he real
 
 * **Consulta de tareas de ejemplo (API REST):**
 
-  ![alt text](TareasDeEj.png)
+  ![TareasApi](Capturas/TareasDeEj.png)
 
 ---
 
